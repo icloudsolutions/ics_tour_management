@@ -1,0 +1,28 @@
+name: Test SSH Connection
+
+on:
+  push:
+    branches:
+      - dev   # ou main
+
+jobs:
+  ssh-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout du code (optionnel pour ce test)
+      #- name: Checkout code
+      #  uses: actions/checkout@v3
+
+      # 2️⃣ Tester la connexion SSH
+      - name: Test SSH to VPS
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            echo ">>> Connected to VPS successfully!"
+            whoami
+            pwd
