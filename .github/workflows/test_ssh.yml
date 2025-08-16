@@ -3,18 +3,16 @@ name: Deploy addons to VPS
 on:
   push:
     branches:
-      - dev  # déclenche seulement sur dev
+      - dev
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout du code dans GitHub Actions (optionnel si tu fais juste pull sur VPS)
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Déploiement sur VPS via SSH
       - name: Deploy on VPS via SSH
         uses: appleboy/ssh-action@v0.1.9
         with:
@@ -23,18 +21,14 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            # Définir le chemin cible
             TARGET_PATH=/root/libya/dev-18/addons/dev
 
-            # Ajouter safe.directory pour git
             git config --global --add safe.directory $TARGET_PATH
 
-            # Aller dans le répertoire et mettre à jour
             cd $TARGET_PATH
             git fetch --all
-            git reset --hard dev/dev
+            git reset --hard origin/dev   # ✅ Correction ici
 
-            # Redémarrer le conteneur Docker
             docker restart dev-18-odoo18-1
 
             echo "✅ Deployment completed for branch dev"
