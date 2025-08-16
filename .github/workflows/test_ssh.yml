@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            TARGET_PATH=/root/libya/dev-18/addons/dev
+            TARGET_PATH=/root/libya/dev-18/addons/dev/ics_tour_management
 
             git config --global --add safe.directory $TARGET_PATH
 
