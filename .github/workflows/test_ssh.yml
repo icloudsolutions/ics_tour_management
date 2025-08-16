@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}        
           script: |
-            git config --global --add safe.directory /home/user/odoo-18-docker-compose/addons
-            cd /home/user/odoo-18-docker-compose/addons
-            git pull origin main
-            docker restart odoo-18-docker-compose-odoo18-1
+            git config --global --add safe.directory /root/libya/dev-18/addons/dev
+            cd /root/libya/dev-18/addons/dev
+            git pull origin dev
+            docker restart dev-18-odoo18-1
