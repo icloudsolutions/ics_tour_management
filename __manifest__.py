@@ -17,6 +17,7 @@ Long description of module's purpose
     'depends': ['base', 'event','sale_management'],
 
     'data': [
+        s<dfqsdf
         'views/event_event_views.xml',
     ],
 
