@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.sale.order.passenger,access_sale_order_passenger,ics_tour_management.model_sale_order_passenger,base.group_user,1,1,1,1

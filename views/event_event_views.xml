@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<odoo>
+        <!-- === RECORD 1: Hide sensitive fields === -->
+        <record id="view_event_form_inherit_hide_fields" model="ir.ui.view" forcecreate="0">
+            <field name="name">event.event.form.inherit.hide.sensitive.fields</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_tz']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='lang']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--xpath expr="//field[@name='event_type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath-->
+                <xpath expr="//field[@name='organizer_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='address_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- === RECORD 2: Hide notebook pages === -->
+        <record id="view_event_form_inherit_hide_pages" model="ir.ui.view" forcecreate="0">
+            <field name="name">event.event.form.hide.communication.and.questions</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='event_communication']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='questions']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--xpath expr="//page[@name='tickets']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath-->
+                <xpath expr="//page[@name='event_notes']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- === RECORD 3: Add tour package fields === -->
+        <record id="view_event_form_inherit_add_package_fields" model="ir.ui.view" forcecreate="0">
+            <field name="name">event.event.form.inherit.add.package.fields</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_tz']" position="before">
+                    <field name="package_template_id" domain="[('sale_order_line_ids', '!=', False)]"/>
+                    <field name="duration_type"/>
+                    <field name="room_type"/>
+
+                    <field name="package_price" readonly="1"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Packages">
+                        <!--field name="package_ids">
+                            <list>
+                                <field name="name"/>
+                                <field name="gender" widget="badge"/>
+                                <field name="passport_no"/>
+                                <field name="age" readonly="1"/>
+                                <field name="ticket_no1"/>
+                                <field name="room_type"/>
+                                <field name="room_nbr"/>
+
+                            </list>
+                        </field-->
+                    </page>
+                    <page string="Hotels">
+                    </page>
+
+                </xpath>
+            </field>
+        </record>
+</odoo>
