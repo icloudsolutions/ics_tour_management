@@ -1,28 +1,24 @@
-name: Test SSH Connection
+name: Deploy addons to VPS
 
 on:
   push:
     branches:
-      - dev   # ou main
+      - dev
 
 jobs:
-  ssh-test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout du code (optionnel pour ce test)
-      #- name: Checkout code
-      #  uses: actions/checkout@v3
-
-      # 2️⃣ Tester la connexion SSH
-      - name: Test SSH to VPS
-        uses: appleboy/ssh-action@v0.1.9
+      - name: Deploy on VPS via SSH
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT }}
+          port: ${{ secrets.VPS_PORT }}        
           script: |
-            echo ">>> Connected to VPS successfully!"
-            whoami
-            pwd
+            git config --global --add safe.directory /home/user/odoo-18-docker-compose/addons
+            cd /home/user/odoo-18-docker-compose/addons
+            git pull origin main
+            docker restart odoo-18-docker-compose-odoo18-1
