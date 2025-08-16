@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Tour Management System",
-    "version": "18.0.0.1.0",
+    "version": "18.0.0.8.0",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -16,7 +16,8 @@ Long description of module's purpose
 
     'depends': ['base', 'event','sale_management'],
 
-    'data': [       
+    'data': [
+        #'security/ir.model.access.csvfff',
         'views/event_event_views.xml',
     ],
 
