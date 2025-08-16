@@ -17,7 +17,7 @@ Long description of module's purpose
     'depends': ['base', 'event','sale_management'],
 
     'data': [
-        'views/event_event_views.xml',
+        'views/event_event_views.xml54',
     ],
 
 }
